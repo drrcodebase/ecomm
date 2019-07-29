@@ -1,7 +1,7 @@
 # ecomm
 python django ecomm application
 
-Setting Up Environment
+Setting Up Environment from scrach 
 
 1) Install latest version of Python (as of now if it python 3.7)
 2) Pip comes with Python, Install virtual environment 
