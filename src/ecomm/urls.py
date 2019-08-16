@@ -22,7 +22,7 @@ from django.conf.urls import url, include
 
 from .views import home_page
 from .views import about_page
-from .views import contact_page
+from .views import contact_page, login_page, register_page
 
 
 
@@ -30,6 +30,8 @@ urlpatterns = [
     path('', home_page),
     path('about/', about_page),
     path('contact/', contact_page),
+    path('login/', login_page),
+    path('register/', register_page),    
     path('', include("products.urls")),
     path('admin/', admin.site.urls),
 ]
