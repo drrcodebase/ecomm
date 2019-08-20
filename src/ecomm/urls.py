@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
+from django.views.generic import TemplateView
 
 from .views import home_page
 from .views import about_page
@@ -26,13 +27,16 @@ from .views import contact_page, login_page, register_page
 
 
 
+
 urlpatterns = [
-    path('', home_page),
-    path('about/', about_page),
-    path('contact/', contact_page),
-    path('login/', login_page),
-    path('register/', register_page),    
-    path('', include("products.urls")),
+    path('', home_page, name="home"),
+    path('about/', about_page, name="about"),
+    path('contact/', contact_page, name="contact"),
+    path('login/', login_page, name="login"),
+    path('bootstrap/', TemplateView.as_view(template_name="bootstrap/example.html")),
+    path('register/', register_page, name="register"),
+    path('products/', include("products.urls")),
+    path('search/', include("search.urls")),
     path('admin/', admin.site.urls),
 ]
 if settings.DEBUG:
@@ -40,3 +44,12 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # if settings.DEBUG:
 #     urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+
+
+
+# include(module, namespace=None, app_name=None)[source]¶
+# include(pattern_list)
+# include((pattern_list, app_namespace), namespace=None)
+# include((pattern_list, app_namespace, instance_namespace))

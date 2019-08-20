@@ -1,4 +1,9 @@
-<form method='POST'> {% csrf_token %}
-{{form}}
-<button type="submit" class='btn btn-success' name="button">Submit</button>
-</form>
+{% extends "base.html"%}
+{% block content%}
+<div class="container">
+    <form method='POST'> {% csrf_token %}
+    {{form}}
+    <button type="submit" class='btn btn-success' name="button">Submit</button>
+    </form>
+</div>
+{% endblock %}

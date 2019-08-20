@@ -14,7 +14,7 @@ class ProductFeaturedListView(ListView):
 
 
 class ProductFeaturedDetailView(DetailView):
-    template_name = 'products/details.html'
+    template_name = 'products/featured-details.html'
 
     def get_queryset(self, *args, **kwargs):
         request = self.request
@@ -23,6 +23,7 @@ class ProductFeaturedDetailView(DetailView):
 
 
 class ProductListView(ListView):
+    print("products list view")
     template_name = 'products/list.html'
 
     # def get_context_data(self, *args, **kwargs):
@@ -40,6 +41,28 @@ def product_list_view(request):
             'object_list': queryset
     }
     return render(request, "products/list.html", context)
+
+
+
+
+class ProductDetailSlugView(DetailView):
+    print("products details view")
+    queryset = Product.objects.all()
+    template_name = 'products/details.html'
+
+    def get_object(self, *args, **kwargs):
+        request = self.request
+        slug = self.kwargs.get('slug')
+        try:
+            instance = Product.objects.get(slug=slug)
+        except Product.DoesNotExist:
+            raise Http404("Not found....")
+        except Product.MultipleObjectsReturned:
+            qs = Product.objects.filter(slug=slug)
+            instance = qs.first()
+        except:
+            raise Http404("Uhhhhhh")
+        return instance
 
 
 class ProductDetailView(DetailView):
