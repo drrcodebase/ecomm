@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from .forms import ContactForm, LoginForm, RegisterForm
 def home_page(request):
     context = {
-        "title":"Hello world title",
+        "title":"Welcome To E-Commerce World",
         "content" : "Welcome to the Home Page",
         "premium_content": "YEAHHHHHHHHHHHH"
     }
@@ -22,7 +22,7 @@ def contact_page(request):
     context = {
         "title":"Contact  Page",
         "content":"welcome to the content page",
-        "form": contact_form        
+        "form": contact_form
     }
     if contact_form.is_valid():
         print(contact_form.cleaned_data)

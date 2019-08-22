@@ -33,6 +33,7 @@ urlpatterns = [
     path('about/', about_page, name="about"),
     path('contact/', contact_page, name="contact"),
     path('login/', login_page, name="login"),
+    path('cart/', include("carts.urls")),
     path('bootstrap/', TemplateView.as_view(template_name="bootstrap/example.html")),
     path('register/', register_page, name="register"),
     path('products/', include("products.urls")),

@@ -1,5 +1,5 @@
-<!-- <h1>{{ brand_name }}</h1> -->
-<nav class="navbar navbar-expand-lg navbar-light bg-dark mb-3">
+{% url 'carts:home' as cart_url %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
   <div class="container">
 
 
@@ -34,6 +34,9 @@
         <a class="nav-link" href="{% url "register" %}">Register</a>
       </li>
       {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ cart_url }}">{{request.session.cart_items }} <i class="fa fa-shopping-cart"></i></a>
+      </li>
     </ul>
     {% include 'search/snippets/search-form.html' %}
   </div>
