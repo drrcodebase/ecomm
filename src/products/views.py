@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.conf.urls import url
 from .models import Product
 from carts.models import Cart
+from analytics.mixins import ObjectViewedMixin
 
 class ProductFeaturedListView(ListView):
     template_name = 'products/list.html'
@@ -13,7 +14,7 @@ class ProductFeaturedListView(ListView):
         return Product.objects.featured()
 
 
-class ProductFeaturedDetailView(DetailView):
+class ProductFeaturedDetailView(ObjectViewedMixin, DetailView):
     template_name = 'products/featured-details.html'
 
     def get_queryset(self, *args, **kwargs):
@@ -23,13 +24,18 @@ class ProductFeaturedDetailView(DetailView):
 
 
 class ProductListView(ListView):
-    print("products list view")
     template_name = 'products/list.html'
 
     # def get_context_data(self, *args, **kwargs):
     #     context = super(ProductListView, self).get_context_data(*args, **kwargs)
     #     print(context)
     #     return context
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductListView, self).get_context_data(*args, **kwargs)
+        cart_obj, new_obj = Cart.objects.new_or_get(self.request)
+        context['cart'] = cart_obj
+        return context
+
     def get_queryset(self, *args, **kwargs):
         request = self.request
         return Product.objects.all()
@@ -45,8 +51,7 @@ def product_list_view(request):
 
 
 
-class ProductDetailSlugView(DetailView):
-    print("products details view")
+class ProductDetailSlugView(ObjectViewedMixin, DetailView):
     queryset = Product.objects.all()
     template_name = 'products/details.html'
 
@@ -68,10 +73,11 @@ class ProductDetailSlugView(DetailView):
             instance = qs.first()
         except:
             raise Http404("Uhhhhhh")
+        # object_viewed_signal.send(instance.__class__, instance=instance, request=request)
         return instance
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(ObjectViewedMixin, DetailView):
 
     template_name = 'products/details.html'
 

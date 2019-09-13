@@ -5,7 +5,6 @@ from products.models import Product
 
 
 class SearchProductView(ListView):
-    print("Search list view")
     template_name = 'search/view.html'
 
     def get_context_data(self, *args, **kwargs):
@@ -17,7 +16,6 @@ class SearchProductView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         request = self.request
-        print(request.GET)
         method_get = request.GET
         query = method_get.get('q', None)
         if query is not None:

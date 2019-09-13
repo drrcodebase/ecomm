@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -39,11 +39,28 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #our apps
+    'addresses',
+    'accounts',
+    'analytics',
+    'billing',
+    'orders',
     'products',
     'search',
     'tags',
     'carts',
+    'marketing',
 ]
+
+AUTH_USER_MODEL = 'accounts.User' # changes built in user model to custom user
+
+MAILCHIMP_API_KEY = "7fc9b63ebd243750efc774b23b0be14d-us4"
+MAILCHIMP_DATA_CENTER = "us4"
+MAILCHIMP_EMAIL_LIST_ID = "f583239ba7"
+
+
+
+STRIPE_SECRET_KEY = "sk_test_1DmqaYwt3fedT3KaMyYdk5sC0000Dy4w1y"
+STRIPE_PUB_KEY = "pk_test_EDCTIuVjYC158QsPGshh2AGZ00SCgAQHBk"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,6 +72,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+LOGOUT_REDIRECT_URL = '/login/'
 ROOT_URLCONF = 'ecomm.urls'
 
 TEMPLATES = [

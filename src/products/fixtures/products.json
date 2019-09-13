@@ -1,0 +1,38 @@
+[
+{
+    "model": "products.product",
+    "pk": 8,
+    "fields": {
+        "title": "T-shirt",
+        "slug": "abc",
+        "description": "very nice and awasome tshirt",
+        "price": "49.99",
+        "image": "products/695546828/695546828.jpeg",
+        "featured": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 9,
+    "fields": {
+        "title": "cap",
+        "slug": "abc1",
+        "description": "beautiful cap for sale",
+        "price": "100.99",
+        "image": "products/2697035981/2697035981.jpeg",
+        "featured": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 10,
+    "fields": {
+        "title": "Pant",
+        "slug": "abc",
+        "description": "nice pant new arrival",
+        "price": "199.99",
+        "image": "products/1413689776/1413689776.jpeg",
+        "featured": true
+    }
+}
+]

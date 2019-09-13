@@ -5,7 +5,20 @@ import string
 
 
 def random_string_generator(size=10, char=string.ascii_lowercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))
+    return ''.join(random.choice(char) for _ in range(size))
+
+
+def unquie_order_id_generator(instance, new_slug=None):
+    """
+    This is for a Django project with and order_id field.
+    """
+    order_new_id = random_string_generator()
+    Klass = instance.__class__
+    qs_exists = Klass.objects.filter(order_id=order_new_id).exists()
+    if qs_exists:
+        return unique_slug_generator(instance)
+    return order_new_id
+
 
 
 def unique_slug_generator(instance, new_slug=None):
